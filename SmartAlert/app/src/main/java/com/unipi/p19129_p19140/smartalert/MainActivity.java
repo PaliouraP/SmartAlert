@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
         TextView tv = findViewById(R.id.TextView1);
-        myRef.setValue("Hello, World! This is a message from far beyond.");
+        myRef.setValue("Hello, World! This is a new message");
 
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
