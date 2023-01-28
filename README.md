@@ -1,5 +1,5 @@
-## SmartAlarm
-# Project for subject: 
+# SmartAlarm
+## Project for subject: 
 Current Topics of Software Engineering - Software for Mobile Devices 
-# Year:
+## Year:
 2023
