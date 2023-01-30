@@ -64,6 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
                     map.put("E-mail", email);
                     map.put("Password", password);
                     FirebaseDatabase.getInstance().getReference().child("users").child(auth.getUid()).updateChildren(map);
+                    FirebaseDatabase.getInstance().getReference().child("users").child(auth.getUid()).child("role").child("normal").setValue(true);
+                    FirebaseDatabase.getInstance().getReference().child("users").child(auth.getUid()).child("role").child("advanced").setValue(false);
 
                 } else {
                     Toast.makeText(RegisterActivity.this, "Registration failed!", Toast.LENGTH_SHORT).show();
