@@ -14,6 +14,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -57,6 +60,11 @@ public class RegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(RegisterActivity.this, "Successful registration!", Toast.LENGTH_SHORT).show();
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("E-mail", email);
+                    map.put("Password", password);
+                    FirebaseDatabase.getInstance().getReference().child("users").child(auth.getUid()).updateChildren(map);
+
                 } else {
                     Toast.makeText(RegisterActivity.this, "Registration failed!", Toast.LENGTH_SHORT).show();
                 }
