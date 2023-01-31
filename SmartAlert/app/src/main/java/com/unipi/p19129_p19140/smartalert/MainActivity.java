@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button register;
     private Button login;
+    private Button report;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         register = findViewById(R.id.register);
         login = findViewById(R.id.login);
+        report = findViewById(R.id.report);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+            }
+        });
+
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ReportActivity.class));
                 finish();
             }
         });
