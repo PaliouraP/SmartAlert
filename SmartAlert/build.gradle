@@ -1,7 +1,6 @@
 buildscript {
     dependencies {
         classpath 'com.google.gms:google-services:4.3.14'
-        classpath 'br.com.simplepass:loading-button-android:1.14.0'
     }
 
 }

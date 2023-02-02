@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText password;
     private Button login;
     private FirebaseAuth auth;
+    private ImageView add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login_btn);
+        add = findViewById(R.id.add);
 
         auth = FirebaseAuth.getInstance();
 
@@ -42,7 +46,10 @@ public class LoginActivity extends AppCompatActivity {
                 String txt_password = password.getText().toString();
                 loginUser(txt_email, txt_password);
             }
+
+
         });
+        more();
     }
 
     private void loginUser(String email, String password) {
@@ -55,4 +62,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    private void more(){
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+            }
+        });
+    }
+
 }

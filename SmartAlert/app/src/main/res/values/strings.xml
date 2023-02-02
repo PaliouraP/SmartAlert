@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">ModernLogin</string>
-    <string name="login_email_hint">Email</string>
+    <string name="app_name" translatable="false">Smart Alert</string>
+    <string name="login_email_hint" translatable="false">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login_button">Login</string>
+    <string name="already_account">Already \nhave an \naccount?</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="new_user">New User? Register now</string>
 </resources>
