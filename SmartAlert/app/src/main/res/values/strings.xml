@@ -2,8 +2,14 @@
     <string name="app_name" translatable="false">Smart Alert</string>
     <string name="login_email_hint" translatable="false">Email</string>
     <string name="login_password_hint">Password</string>
+    <string name="login_password_confirm_hint">Confirm Password</string>
     <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+
     <string name="already_account">Already \nhave an \naccount?</string>
+    <string name="already_account_flat">Already have an account?</string>
+
     <string name="forgot_password">Forgot password?</string>
     <string name="new_user">New User? Register now</string>
+    <string name="register_title">Create a \nnew account</string>
 </resources>

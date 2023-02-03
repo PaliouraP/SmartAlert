@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,9 +22,10 @@ import java.util.HashMap;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText email;
-    private EditText password;
+    private EditText password,password_confirm;
     private Button register;
     private FirebaseAuth auth;
+    private TextView to_login;
 
 
     @Override
@@ -33,7 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        password_confirm=findViewById(R.id.confirm_password);
         register = findViewById(R.id.register_btn);
+        to_login = findViewById(R.id.login_btn);
 
         auth = FirebaseAuth.getInstance();
 
@@ -42,12 +46,19 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
+                String txt_password_confirm = password_confirm.getText().toString();
+
 
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty((txt_password))){
                     Toast.makeText(RegisterActivity.this, "Empty credentials!", Toast.LENGTH_SHORT).show();
                 } else if (txt_password.length() < 6){
                     Toast.makeText(RegisterActivity.this, "Password needs to be 6 characters or longer!", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if(txt_password!=txt_password_confirm){
+                    Toast.makeText(RegisterActivity.this, "Passwords did not match!", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
                     registerUser(txt_email, txt_password);
                 }
             }

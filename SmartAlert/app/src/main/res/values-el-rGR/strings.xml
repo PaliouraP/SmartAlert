@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="login_password_hint">Κωδικός Πρόσβασης</string>
-    <string name="login_button">Σύνδεση</string>
+    <string name="login_button">Συνδεση</string>
     <string name="already_account">Έχετε ήδη \n λογαριασμό;</string>
     <string name="forgot_password">Ξεχάσατε τον κωδικό σας;</string>
     <string name="new_user">Νέος χρήστης; Δημιουργήστε έναν λογαριασμό</string>
+    <string name="register_title">Δημιουργήστε \nέναν νέο\nλογαρισμό</string>
+    <string name="already_account_flat">Έχετε ήδη λογαριασμό;</string>
+    <string name="login_password_confirm_hint">Επιβεβαίωση Κωδικού Πρόσβασης</string>
+    <string name="register_button">Δημιουργια Λογαριασμου</string>
 </resources>

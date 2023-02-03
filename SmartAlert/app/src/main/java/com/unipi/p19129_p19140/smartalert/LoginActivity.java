@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private FirebaseAuth auth;
     private ImageView add;
+    private TextView to_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         login = findViewById(R.id.login_btn);
         add = findViewById(R.id.add);
+        to_register =findViewById(R.id.register_btn);
 
         auth = FirebaseAuth.getInstance();
 
@@ -49,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         });
-        more();
+        to_register();
     }
 
     private void loginUser(String email, String password) {
@@ -62,7 +64,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private void more(){
+    private void to_register(){
+        to_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+            }
+        });
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
             }
         });
+
     }
 
 }
