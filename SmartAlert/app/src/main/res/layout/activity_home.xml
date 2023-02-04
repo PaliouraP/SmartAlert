@@ -4,13 +4,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".HomeActivity"
+    android:layout_gravity="center"
+    android:background="@color/whiteTextColor">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="@color/primaryTextColor"/>
+        <ImageView
+            android:id="@+id/logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logout"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="9dp"
+            >
 
-    <Button
-        android:id="@+id/logout_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="logout"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="349dp" />
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_top_edges_rounded"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/whiteTextColor"
+                    app:cardCornerRadius="20dp"
+                    android:layout_alignParentStart="true"
+                    >
+                    <TextView
+                        android:layout_width="190dp"
+                        android:layout_height="200dp"
+                        android:text="Report incident"
+                        android:layout_centerVertical="true"
+                        android:gravity="center">
+                    </TextView>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/whiteTextColor"
+                    android:layout_alignParentEnd="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <TextView
+                        android:layout_width="190dp"
+                        android:layout_height="200dp"
+                        android:text="Report incident"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"/>
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/whiteTextColor"
+                    app:cardCornerRadius="20dp"
+                    android:layout_alignParentStart="true"
+                    >
+                    <TextView
+                        android:layout_width="190dp"
+                        android:layout_height="200dp"
+                        android:text="Report incident"
+                        android:layout_centerVertical="true"
+                        android:gravity="center">
+                    </TextView>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/whiteTextColor"
+                    android:layout_alignParentEnd="true"
+                    app:cardCornerRadius="20dp"
+                    android:layout_marginLeft="20dp"
+                    >
+                    <TextView
+                        android:layout_width="190dp"
+                        android:layout_height="200dp"
+                        android:text="Report incident"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"/>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/whiteTextColor">
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
 </RelativeLayout>
