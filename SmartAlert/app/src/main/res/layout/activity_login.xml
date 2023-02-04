@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_register_hero" />
+                    android:src="@drawable/ic_login_hero" />
 
             </RelativeLayout>
 
@@ -77,7 +77,7 @@
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/newsMoreTextSize" />
 
-            <Button
+             <Button
                 android:id="@+id/login_btn"
                 style="@style/loginButton"
                 android:layout_gravity="center_horizontal"

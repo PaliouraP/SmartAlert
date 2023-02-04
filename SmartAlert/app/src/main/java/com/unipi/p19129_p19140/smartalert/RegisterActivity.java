@@ -3,11 +3,13 @@ package com.unipi.p19129_p19140.smartalert;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button register;
     private FirebaseAuth auth;
     private TextView to_login;
+    private ImageView add;
 
 
     @Override
@@ -38,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         password_confirm=findViewById(R.id.confirm_password);
         register = findViewById(R.id.register_btn);
         to_login = findViewById(R.id.login_btn);
+        add=findViewById(R.id.add);
 
         auth = FirebaseAuth.getInstance();
 
@@ -63,6 +67,27 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        to_login();
+    }
+
+    private void to_login(){
+        to_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
+            }
+        });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
+            }
+        });
+
+
     }
 
     private void registerUser(String email, String password) {
