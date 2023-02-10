@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,13 +33,14 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class ReportActivity extends AppCompatActivity {
+public class ReportActivity extends AppCompatActivity implements LocationListener {
 
     private Spinner type;
     private EditText details;
     private ImageView report;
-
-    private LocationManager locationManager;
+    private TextView location_text;
+    // Location manager object
+    LocationManager locationManager;
     double latitude;
     double longitude;
 
@@ -66,20 +68,18 @@ public class ReportActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
         type.setAdapter(adapter);
 
+        Get_Location();
 
 
-        // location
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
-        }
+
+        // ON CLICK LISTENER FOR REPORT BUTTON
         report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String txt_type = type.getSelectedItem().toString();
                 String txt_details = details.getText().toString();
 
-                if (TextUtils.isEmpty(txt_details) || TextUtils.isEmpty((txt_type))){
+                if (TextUtils.isEmpty(txt_details) || TextUtils.isEmpty((txt_type))) {
                     Toast.makeText(ReportActivity.this, "Empty fields!", Toast.LENGTH_SHORT).show();
                 } else {
                     makeReport(txt_type, txt_details);
@@ -88,12 +88,37 @@ public class ReportActivity extends AppCompatActivity {
         });
     }
 
+    public void Get_Location() {
+        // PERMISSION
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},2);
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 1, this);
+    }
 
+    // HANDLING PERMISSION RESULT
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        latitude=location.getLatitude();
+        longitude=location.getLongitude();
+
+        location_text.setText(location.getLatitude()+","+location.getLongitude());
+    }
     private void makeReport(String type, String details) {
+
         String timestamp = String.valueOf(Calendar.getInstance().getTime());
+        String user_location=latitude+","+longitude;
         HashMap<String, Object> map = new HashMap<>();
         map.put("User", "user id"); //change to actual user id
-        map.put("Location", "0,0"); // change to actual location
+        map.put("Location", user_location); // change to actual location
         map.put("Timestamp", timestamp);
         map.put("Type", type);
         map.put("Details", details);
@@ -103,4 +128,4 @@ public class ReportActivity extends AppCompatActivity {
     }
 
 
-}
+    }
