@@ -12,4 +12,8 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="new_user">New User? Register now</string>
     <string name="register_title">Create a \nnew account</string>
+
+    <string name="report_incident">Report an incident</string>
+    <string name="welcome_message">Welcome back, User!</string>
+
 </resources>
