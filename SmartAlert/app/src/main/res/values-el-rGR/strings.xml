@@ -11,4 +11,6 @@
     <string name="register_button">Δημιουργια Λογαριασμου</string>
     <string name="report_incident">Καταγράψτε ένα περιστατικό</string>
     <string name="welcome_message">Καλωσήρθες και πάλι, user!</string>
+    <string name="weird">Παρατηρήσατε κάτι περίεργο;\nΕνημερώστε μας!</string>
+    <string name="dont_worry">Μην ανησυχείτε!\nΘα το αναλάβουμε εμείς!</string>
 </resources>

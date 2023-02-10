@@ -69,7 +69,7 @@
                 android:layout_width="50dp"
                 android:layout_height="40dp"
                 android:layout_margin="@dimen/loginViewsMargin"
-                android:src="@drawable/logout1"
+                android:src="@drawable/logout_door"
                 android:id="@+id/logout_btn">
                 >
 

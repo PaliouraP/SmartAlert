@@ -16,4 +16,8 @@
     <string name="report_incident">Report an incident</string>
     <string name="welcome_message">Welcome back, User!</string>
 
+    <string name="weird">Noticed anything weird?\nLet us know!</string>
+    <string name="dont_worry">Don\'t worry!\nWe\'ll take on from here!</string>
+
+
 </resources>

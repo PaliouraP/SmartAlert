@@ -10,11 +10,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,7 +36,7 @@ public class ReportActivity extends AppCompatActivity {
 
     private Spinner type;
     private EditText details;
-    private Button report;
+    private ImageView report;
 
     private LocationManager locationManager;
     double latitude;
