@@ -13,4 +13,5 @@
     <string name="welcome_message">Καλωσήρθες και πάλι, user!</string>
     <string name="weird">Παρατηρήσατε κάτι περίεργο;\nΕνημερώστε μας!</string>
     <string name="dont_worry">Μην ανησυχείτε!\nΘα το αναλάβουμε εμείς!</string>
+    <string name="upload_image">Ανεβαστε Φωτογραφια</string>
 </resources>

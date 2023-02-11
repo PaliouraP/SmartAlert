@@ -19,26 +19,38 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private ImageView logout;
     GridView options;
+    private ImageView menu_report,menu_logout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        logout=findViewById(R.id.logout_btn);
+        menu_report=findViewById(R.id.menu_report);
+        menu_logout=findViewById(R.id.logout_btn);
         to_logout();
+        to_report();
         gridview();
-
-
-
     }
+
+
+
     private void to_logout(){
-        logout.setOnClickListener(new View.OnClickListener() {
+        menu_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this,LoginActivity.class));
                 overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+            }
+        });
+    }
+    private void to_report(){
+        menu_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,ReportActivity.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
             }
         });
     }
