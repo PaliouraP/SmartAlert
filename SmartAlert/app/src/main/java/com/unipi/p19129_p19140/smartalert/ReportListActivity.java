@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.Repo;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -64,7 +65,9 @@ public class ReportListActivity extends AppCompatActivity {
 
                     for(int j = i+1; j < all_reports.size(); j++){
                         boolean check_dis = disObj.checkDistance(all_reports.get(i).getLocation(), all_reports.get(j).getLocation());
-                        if (all_reports.get(j).getType().equals(s_type) && check_dis ) {
+                        boolean time_dif = disObj.checkDuration(all_reports.get(i).getTimestamp(), all_reports.get(j).getTimestamp());
+                        Log.d("SmartAlert", String.valueOf(time_dif));
+                        if (all_reports.get(j).getType().equals(s_type) && check_dis && time_dif ) {
                             count++;
 
                         }
