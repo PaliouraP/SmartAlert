@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!--permissions for location-->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
+    <!-- permissions for location -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,9 +16,8 @@
         android:theme="@style/Theme.SmartAlert"
         tools:targetApi="31">
         <activity
-            android:name=".ReportActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ReportListActivity"
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -30,43 +28,47 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ReportActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+
+        </activity>
+        <activity
             android:name=".HomeActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".LoginActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"></action>
-            </intent-filter>
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
