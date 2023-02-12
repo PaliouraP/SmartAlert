@@ -16,12 +16,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.core.Repo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ReportListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     DatabaseReference db;
     ReportAdapter reportAdapter;
+    ArrayList<ReportModel> all_reports;
     ArrayList<ReportModel> report_list;
 
 
@@ -35,6 +37,7 @@ public class ReportListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        all_reports = new ArrayList<>();
         report_list = new ArrayList<>();
         reportAdapter = new ReportAdapter(this, report_list);
         recyclerView.setAdapter(reportAdapter);
@@ -45,8 +48,30 @@ public class ReportListActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
 
                     ReportModel report = dataSnapshot.getValue(ReportModel.class);
-                    report_list.add(report);
+                    all_reports.add(report);
                 }
+                String s_type = "";
+                int count = 0;
+                for (int i = 0; i < all_reports.size(); i++){
+                    s_type = all_reports.get(i).getType();
+                    count = 1;
+                    ReportModel general_report = new ReportModel();
+                    general_report.Type = s_type;
+                    general_report.Location = all_reports.get(i).getLocation();
+                    general_report.Timestamp = all_reports.get(i).getTimestamp();
+                    for(int j = i+1; j < all_reports.size(); j++){
+                        if (all_reports.get(j).getType().equals(s_type)) {
+                            count++;
+
+                        }
+                    }
+                    general_report.reporter_sum = count;
+                    if (count>1) {
+                        report_list.add(general_report);
+                    }
+
+                }
+
                 reportAdapter.notifyDataSetChanged();
             }
 

@@ -37,7 +37,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         holder.location.setText(report.getLocation());
         holder.time.setText(report.getTimestamp());
 
-        //holder.reporter_sum.setText(report.getReporter_sum());
+        holder.reporter_sum.setText(String.valueOf(report.reporter_sum));
     }
 
     @Override
@@ -46,14 +46,14 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     }
 
     public static class ReportViewHolder extends RecyclerView.ViewHolder {
-        TextView type, location, time;
+        TextView type, location, time, reporter_sum;
 
         public ReportViewHolder(@NonNull View itemView) {
             super(itemView);
             type = itemView.findViewById(R.id.single_report_type);
             location = itemView.findViewById(R.id.single_report_location);
             time = itemView.findViewById(R.id.single_report_time);
-            //reporter_sum = itemView.findViewById(R.id.single_report_reporters_sum);
+            reporter_sum = itemView.findViewById(R.id.single_report_reporters_sum);
         }
     }
 }
