@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -52,6 +53,7 @@ public class ReportListActivity extends AppCompatActivity {
                 }
                 String s_type = "";
                 int count = 0;
+                DistanceBetween disObj = new DistanceBetween();
                 for (int i = 0; i < all_reports.size(); i++){
                     s_type = all_reports.get(i).getType();
                     count = 1;
@@ -59,8 +61,10 @@ public class ReportListActivity extends AppCompatActivity {
                     general_report.Type = s_type;
                     general_report.Location = all_reports.get(i).getLocation();
                     general_report.Timestamp = all_reports.get(i).getTimestamp();
+
                     for(int j = i+1; j < all_reports.size(); j++){
-                        if (all_reports.get(j).getType().equals(s_type)) {
+                        boolean check_dis = disObj.checkDistance(all_reports.get(i).getLocation(), all_reports.get(j).getLocation());
+                        if (all_reports.get(j).getType().equals(s_type) && check_dis ) {
                             count++;
 
                         }
