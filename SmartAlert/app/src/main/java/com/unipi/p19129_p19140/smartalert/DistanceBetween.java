@@ -24,7 +24,7 @@ public class DistanceBetween {
     {
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD hh:mm:ss");
         try {
             cal1.setTime(format.parse(sdate1));
             cal2.setTime(format.parse(sdate2));
