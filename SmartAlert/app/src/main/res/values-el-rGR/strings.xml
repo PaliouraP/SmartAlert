@@ -14,4 +14,10 @@
     <string name="weird">Παρατηρήσατε κάτι περίεργο;\nΕνημερώστε μας!</string>
     <string name="dont_worry">Μην ανησυχείτε!\nΘα το αναλάβουμε εμείς!</string>
     <string name="upload_image">Ανεβαστε Φωτογραφια</string>
+    <string name="title_reports">Τρέχοντα περιστατικά</string>
+    <string name="no_reports">Αριθμός Περιστατικών</string>
+    <string name="report_time">Ώρα καταγραφής</string>
+    <string name="report_location">Τοποθεσία</string>
+    <string name="accept">αποδοχη</string>
+    <string name="decline">απορριψη</string>
 </resources>

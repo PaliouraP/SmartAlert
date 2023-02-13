@@ -3,41 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="8dp"
-    app:cardCornerRadius="8dp"
-    android:layout_margin="16dp">
+    app:cardElevation="0dp"
+    app:cardCornerRadius="20dp"
+    android:layout_margin="16dp"
+    >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_gravity="center">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/parent"
             android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Report Type: "
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold"/>
+            android:orientation="horizontal"
+            >
 
             <TextView
                 android:id="@+id/single_report_type"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:textAlignment="textStart"
                 android:text="placeholder"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
@@ -45,22 +42,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Users reported: "
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold"/>
+                android:text="@string/no_reports"
+                android:textColor="@color/black_semi"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/single_report_reporters_sum"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
                 android:text="placeholder"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textColor="@color/black_semi"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
@@ -68,22 +66,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Approximate time: "
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold"/>
+                android:text="@string/report_time"
+                android:textColor="@color/black_semi"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/single_report_time"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
                 android:text="placeholder"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textColor="@color/black_semi"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
@@ -91,42 +90,47 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Approximate location:"
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold"/>
+                android:text="@string/report_location"
+                android:textColor="@color/black_semi"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/single_report_location"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
                 android:text="placeholder"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textColor="@color/black_semi"
+                android:textSize="15sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp">
 
             <Button
                 android:id="@+id/report_accept"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Accept"
-                android:backgroundTint="@color/black"
-                android:layout_marginRight="24dp"/>
+                style="@style/viewParent"
+                android:backgroundTint="@color/acceptance"
+                android:textSize="15sp"
+                android:textColor="@color/whiteTextColor"
+                android:text="@string/accept"
+                android:layout_marginEnd="24dp"
+                />
 
             <Button
                 android:id="@+id/report_decline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:text="Decline"
-                android:textColor="@color/black"
-                app:strokeWidth="2dp" />
+                style="@style/viewParent"
+                android:textSize="15sp"
+                android:backgroundTint="@color/decline"
+                android:text="@string/decline"
+
+                android:textColor="@color/whiteTextColor"
+                />
 
         </LinearLayout>
     </LinearLayout>

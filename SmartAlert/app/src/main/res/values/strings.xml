@@ -20,5 +20,17 @@
     <string name="dont_worry">Don\'t worry!\nWe\'ll take on from here!</string>
     <string name="upload_image">Upload Image</string>
 
+    <string name="title_reports">Current Reports</string>
+    <string name="no_reports">No. of reports</string>
+    <string name="report_time">Time of report</string>
+    <string name="report_location">Location</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+
+
+
+
+
+
 
 </resources>

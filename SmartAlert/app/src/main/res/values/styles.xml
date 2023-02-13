@@ -47,5 +47,16 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:paddingLeft">5dp</item>
     </style>
+    <style name="accept_button" parent="parent">
+        <item name="background">@drawable/accept_button</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:padding">2dp</item>
+    </style>
+    <style name="decline_button" parent="parent">
+        <item name="background">@drawable/decline_button</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:padding">2dp</item>
+    </style>
+
 
 </resources>

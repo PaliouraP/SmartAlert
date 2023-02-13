@@ -11,16 +11,19 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="SmartAlert"
-        android:roundIcon="@drawable/danger"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAlert"
         tools:targetApi="31">
         <activity
             android:name=".ReportListActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""
+                />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
