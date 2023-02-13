@@ -38,8 +38,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -177,7 +179,9 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
 
     // REPORT FUNCTION IS CALLED WHEN PRESSING THE ADD REPORT BUTTON
     private void makeReport(String type, String details) {
-        String timestamp = String.valueOf(Calendar.getInstance().getTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD hh:mm:ss");
+        Date date = new Date();
+        String timestamp = String.valueOf(formatter.format(date));
         String user_location=latitude+","+longitude;
         uploadImage(type,user_location);
         HashMap<String, Object> map = new HashMap<>();
@@ -186,7 +190,7 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
         map.put("Timestamp", timestamp);
         map.put("Type", type);
         map.put("Details", details);
-        map.put("Approved", false);
+        map.put("status", "pending");
         FirebaseDatabase.getInstance().getReference().child("alerts").push().updateChildren(map);
         Toast.makeText(ReportActivity.this, "Reported successfully!", Toast.LENGTH_SHORT).show();
     }

@@ -1,5 +1,7 @@
 package com.unipi.p19129_p19140.smartalert;
 
+import android.util.Log;
+
 import java.lang.Math.*;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -10,6 +12,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class DistanceBetween {
+    public SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD hh:mm:ss");
     public boolean checkDistance(String loc_1, String loc_2)
     {
         String[] location_1 = loc_1.split(",");
@@ -24,7 +27,7 @@ public class DistanceBetween {
     {
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD hh:mm:ss");
+
         try {
             cal1.setTime(format.parse(sdate1));
             cal2.setTime(format.parse(sdate2));
@@ -37,5 +40,23 @@ public class DistanceBetween {
 
 
         return TimeUnit.MILLISECONDS.toHours(Math.abs(target - original)) < 2;
+    }
+
+    public boolean beforeNow(String date){
+        Date target_date = new Date();
+
+        Date now = new Date();
+        Log.d("now1", String.valueOf(now));
+        try {
+            target_date = format.parse(date);
+
+            now = format.parse(String.valueOf(now));
+            Log.d("now2", String.valueOf(now));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return target_date.before(now);
+
     }
 }
