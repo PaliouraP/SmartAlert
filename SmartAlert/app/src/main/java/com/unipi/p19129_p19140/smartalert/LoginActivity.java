@@ -18,6 +18,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -27,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ImageView add;
     private TextView to_register;
+    DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +62,33 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
-        auth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+        auth.signInWithEmailAndPassword(email.trim(), password.trim()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Toast.makeText(LoginActivity.this, "Successful login!", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                FirebaseUser firebaseUser = auth.getCurrentUser();
+                ref = FirebaseDatabase.getInstance().getReference().child("roles").child(firebaseUser.getUid());
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        try {
+                            String userRole = snapshot.getValue().toString();
+                            if(userRole.equals("advanced")){
+                                startActivity(new Intent(LoginActivity.this, ReportListActivity.class));
+                                Toast.makeText(LoginActivity.this, "Successful login!", Toast.LENGTH_SHORT).show();
+                            }else{
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                Toast.makeText(LoginActivity.this, "Successful login!", Toast.LENGTH_SHORT).show();
+                            }
+                        }catch (Throwable e){
+                            Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 finish();
             }
         });

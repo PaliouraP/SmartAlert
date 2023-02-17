@@ -53,17 +53,17 @@ public class RegisterActivity extends AppCompatActivity {
                 String txt_password_confirm = password_confirm.getText().toString();
 
 
-                if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty((txt_password))){
+                if (TextUtils.isEmpty(txt_email.trim()) || TextUtils.isEmpty((txt_password.trim()))){
                     Toast.makeText(RegisterActivity.this, "Empty credentials!", Toast.LENGTH_SHORT).show();
-                } else if (txt_password.length() < 6){
+                } else if (txt_password.trim().length() < 6){
                     Toast.makeText(RegisterActivity.this, "Password needs to be 6 characters or longer!", Toast.LENGTH_SHORT).show();
                 }
-                else if(txt_password!=txt_password_confirm){
+                else if(!txt_password.trim().equals(txt_password_confirm.trim())){
                     Toast.makeText(RegisterActivity.this, "Passwords did not match!", Toast.LENGTH_SHORT).show();
 
                 }
                 else {
-                    registerUser(txt_email, txt_password);
+                    registerUser(txt_email.trim(), txt_password.trim());
                 }
             }
         });
@@ -96,13 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     Toast.makeText(RegisterActivity.this, "Successful registration!", Toast.LENGTH_SHORT).show();
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("E-mail", email);
-                    map.put("Password", password);
-                    FirebaseDatabase.getInstance().getReference().child("users").child(auth.getUid()).updateChildren(map);
-                    FirebaseDatabase.getInstance().getReference().child("users").child(auth.getUid()).child("role").child("normal").setValue(true);
-                    FirebaseDatabase.getInstance().getReference().child("users").child(auth.getUid()).child("role").child("advanced").setValue(false);
-
+                    FirebaseDatabase.getInstance().getReference().child("roles").child(auth.getUid()).setValue("normal"); // default user registering is normal
                 } else {
                     Toast.makeText(RegisterActivity.this, "Registration failed!", Toast.LENGTH_SHORT).show();
                 }
