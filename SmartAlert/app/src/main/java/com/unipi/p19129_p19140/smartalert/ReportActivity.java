@@ -232,14 +232,14 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
 
     // REPORT FUNCTION IS CALLED WHEN PRESSING THE ADD REPORT BUTTON
     private void makeReport(String type, String details) {
-        SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-DD hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
         Date date = new Date();
         String timestamp = String.valueOf(formatter.format(date));
         String user_location=latitude+","+longitude;
         uploadImage(type,user_location);
         HashMap<String, Object> map = new HashMap<>();
-        map.put("User", uid); //change to actual user id
-        map.put("Location", user_location); // change to actual location
+        map.put("User", uid);
+        map.put("Location", user_location); 
         map.put("Timestamp", timestamp);
         map.put("Type", type);
         map.put("Details", details);
