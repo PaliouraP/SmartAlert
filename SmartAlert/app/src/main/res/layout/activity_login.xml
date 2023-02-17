@@ -8,13 +8,60 @@
     android:background="@color/login_bk_color"
     android:focusableInTouchMode="true"
     android:gravity="center">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp">
+        <TextView
+            android:id="@+id/english_language"
+            style="@style/viewParent.headerText.NoMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EN"
+            android:textColor="@color/blue"
+            android:textSize="13sp"
 
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.015"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.203" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="9dp"
+            android:layout_height="15dp"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="@+id/greek_language"
+            app:layout_constraintEnd_toStartOf="@+id/greek_language"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/english_language"
+            app:layout_constraintTop_toTopOf="@+id/english_language"
+            app:srcCompat="@drawable/divider_blue" />
+
+        <TextView
+            android:id="@+id/greek_language"
+            style="@style/viewParent.headerText.NoMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EL"
+            android:textColor="@color/blue"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@+id/header"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.078"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerInParent="true"
         android:paddingTop="20dp">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,13 +78,17 @@
                     style="@style/viewParent.headerText.NoMode"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/blue"
+                    android:layout_marginEnd="4dp"
                     android:text="@string/already_account" />
 
+
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="194dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
+                    android:layout_marginTop="0dp"
                     android:src="@drawable/ic_login_hero" />
 
             </RelativeLayout>
@@ -64,6 +115,7 @@
                     android:id="@+id/password"
                     style="@style/modifiedEditText"
                     android:hint="@string/login_password_hint"
+                    android:inputType="textPassword"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +124,7 @@
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
-                android:text="Forgot Password?"
+                android:text="@string/forgot_password"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/newsMoreTextSize" />
 

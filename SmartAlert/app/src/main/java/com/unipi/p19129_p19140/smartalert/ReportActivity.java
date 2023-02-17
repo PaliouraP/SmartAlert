@@ -58,7 +58,7 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
     private EditText details;
     private ImageView report;
     private Button upload;
-    private ImageView menu_report,menu_logout;
+    private ImageView menu_report,menu_logout,menu_home;
     TextView greek_lan_btn, english_lan_btn;
 
     // Location manager object
@@ -94,6 +94,7 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
         upload = findViewById(R.id.upload_img);
         menu_report=findViewById(R.id.menu_report);
         menu_logout=findViewById(R.id.logout_btn);
+        menu_home=findViewById(R.id.home);
         greek_lan_btn=findViewById(R.id.greek_language);
         english_lan_btn=findViewById(R.id.english_language);
 
@@ -146,6 +147,13 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
             public void onClick(View v) {
                 startActivity(new Intent(ReportActivity.this,LoginActivity.class));
                 overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+            }
+        });
+        menu_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportActivity.this,HomeActivity.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
             }
         });
 

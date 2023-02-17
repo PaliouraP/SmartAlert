@@ -99,19 +99,20 @@
         >
 
         <ImageView
-            android:id="@+id/menu_report"
+            android:id="@+id/home"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_margin="@dimen/loginViewsMargin"
-            android:src="@drawable/new_report">
+            android:src="@drawable/house">
 
         </ImageView>
 
         <ImageView
+            android:id="@+id/reports"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_margin="@dimen/loginViewsMargin"
-            android:src="@drawable/profile">
+            android:src="@drawable/siren">
             >
 
         </ImageView>
@@ -121,7 +122,7 @@
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_margin="@dimen/loginViewsMargin"
-            android:src="@drawable/logout_door"
+            android:src="@drawable/logout"
             >
 
 

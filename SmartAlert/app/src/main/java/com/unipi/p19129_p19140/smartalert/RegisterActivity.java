@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -27,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText password,password_confirm;
     private Button register;
     private FirebaseAuth auth;
-    private TextView to_login;
+    private TextView to_login,greek_lan_btn, english_lan_btn;
     private ImageView add;
 
 
@@ -42,6 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
         register = findViewById(R.id.register_btn);
         to_login = findViewById(R.id.login_btn);
         add=findViewById(R.id.add);
+        greek_lan_btn=findViewById(R.id.greek_language);
+        english_lan_btn=findViewById(R.id.english_language);
 
         auth = FirebaseAuth.getInstance();
 
@@ -67,8 +74,46 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-
+        //Language Functions
+        Select_Greek();
+        Select_English();
+        //Menu Functions
         to_login();
+    }
+
+    private void Select_English() {
+        english_lan_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLanguage("en");
+                startActivity(new Intent(RegisterActivity.this,RegisterActivity.class));
+            }
+        });
+    }
+
+    private void Select_Greek() {
+        greek_lan_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLanguage("el");
+                startActivity(new Intent(RegisterActivity.this,RegisterActivity.class));
+
+            }
+        });
+    }
+
+    private void setLanguage(String code) {
+        Resources resources = getResources();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        Configuration configuration = resources.getConfiguration();
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            configuration.setLocale(new Locale(code.toLowerCase()));
+        }
+        else {
+            configuration.locale= new Locale(code.toLowerCase());
+
+        }
+        resources.updateConfiguration(configuration,displayMetrics);
     }
 
     private void to_login(){

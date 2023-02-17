@@ -28,7 +28,7 @@ import java.util.Locale;
 public class HomeActivity extends AppCompatActivity {
 
     GridView options;
-    private ImageView menu_report,menu_logout;
+    private ImageView menu_report,menu_logout,menu_home;
     TextView greek_lan_btn, english_lan_btn;
     private String uid;
 
@@ -39,10 +39,12 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         menu_report=findViewById(R.id.menu_report);
         menu_logout=findViewById(R.id.logout_btn);
+        menu_home=findViewById(R.id.home);
         greek_lan_btn=findViewById(R.id.greek_language);
         english_lan_btn=findViewById(R.id.english_language);
         to_logout();
         to_report();
+        to_home();
         gridview();
         Select_Greek();
         Select_English();
@@ -54,6 +56,15 @@ public class HomeActivity extends AppCompatActivity {
         {
             uid =(String) b.get("uid");
         }
+    }
+
+    private void to_home() {
+        menu_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,HomeActivity.class));
+            }
+        });
     }
 
     private void Select_English() {
@@ -118,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
         ArrayList<CardModel> cardModelArrayList= new ArrayList<CardModel>();
         String card1=getString(R.string.report_message);
         String card2=getString(R.string.statistics);
-        cardModelArrayList.add(new CardModel(card1,R.drawable.danger));
+        cardModelArrayList.add(new CardModel(card1,R.drawable.siren));
         cardModelArrayList.add(new CardModel(card2,R.drawable.increase));
 
         CardAdapter adapter= new CardAdapter(this,cardModelArrayList);
@@ -126,8 +137,6 @@ public class HomeActivity extends AppCompatActivity {
         options.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView message=(TextView) view.findViewById(R.id.TexV);
-                Toast.makeText(HomeActivity.this, "" + position, Toast.LENGTH_SHORT).show();
                 Intent intent = null;
                 switch (position){
                     case 0:

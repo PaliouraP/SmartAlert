@@ -38,8 +38,7 @@ public class ReportListActivity extends AppCompatActivity {
     ArrayList<ReportModel> all_reports_filtered;
     ArrayList<ReportModel> report_list;
     TextView greek_lan_btn, english_lan_btn;
-    private ImageView menu_report,menu_logout;
-
+    private ImageView menu_logout;
 
 
     @Override
@@ -48,7 +47,6 @@ public class ReportListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report_list);
         greek_lan_btn=findViewById(R.id.greek_language);
         english_lan_btn=findViewById(R.id.english_language);
-        menu_report=findViewById(R.id.menu_report);
         menu_logout=findViewById(R.id.logout_btn);
 
         recyclerView = findViewById(R.id.report_list);
@@ -67,7 +65,6 @@ public class ReportListActivity extends AppCompatActivity {
         Select_English();
         //Menu Functions
         to_logout();
-        to_report();
 
         db.addValueEventListener(new ValueEventListener() {
             @Override
@@ -123,15 +120,7 @@ public class ReportListActivity extends AppCompatActivity {
 
     }
 
-    private void to_report() {
-        menu_report.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ReportListActivity.this,ReportActivity.class));
-                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
-            }
-        });
-    }
+
 
     private void to_logout() {
         menu_logout.setOnClickListener(new View.OnClickListener() {
