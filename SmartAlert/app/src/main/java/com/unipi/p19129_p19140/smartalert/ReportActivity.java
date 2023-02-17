@@ -7,6 +7,8 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -15,6 +17,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -44,6 +47,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class ReportActivity extends AppCompatActivity implements LocationListener {
@@ -53,6 +57,8 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
     private ImageView report;
     private Button upload;
     private ImageView menu_report,menu_logout;
+    TextView greek_lan_btn, english_lan_btn;
+
     // Location manager object
     LocationManager locationManager;
     double latitude;
@@ -84,6 +90,8 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
         upload = findViewById(R.id.upload_img);
         menu_report=findViewById(R.id.menu_report);
         menu_logout=findViewById(R.id.logout_btn);
+        greek_lan_btn=findViewById(R.id.greek_language);
+        english_lan_btn=findViewById(R.id.english_language);
 
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
@@ -94,6 +102,9 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
         type.setAdapter(adapter);
         //CALLING GET_LOCATION FUNCTION
         Get_Location();
+        //Language Change
+        Select_Greek();
+        Select_English();
 
         // UPLOAD IMAGE BUTTON
         upload.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +153,36 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
         });
 
     }
+
+    private void Select_English() {
+        english_lan_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLanguage("en");
+                startActivity(new Intent(ReportActivity.this,ReportActivity.class));
+
+            }
+        });
+    }
+
+    private void Select_Greek() {
+        greek_lan_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLanguage("el");
+                startActivity(new Intent(ReportActivity.this,ReportActivity.class));
+            }
+        });
+    }
+
+    private void setLanguage(String code) {
+        Resources resources = getResources();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        Configuration configuration = resources.getConfiguration();
+        configuration.setLocale(new Locale(code.toLowerCase()));
+        resources.updateConfiguration(configuration,displayMetrics);
+    }
+
     // CHECK IF IMAGE WAS UPLOADED AND SAVE CHOSEN IMAGE
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

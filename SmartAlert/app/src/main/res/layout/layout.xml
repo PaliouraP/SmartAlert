@@ -6,7 +6,7 @@
     app:cardCornerRadius="20dp"
     app:cardElevation="0dp"
     android:layout_gravity="center"
-    app:contentPadding="3.5dp"
+    app:contentPadding="3dp"
     android:backgroundTint="#6AA9FF"
     android:layout_margin="10dp"
     >

@@ -14,7 +14,9 @@
     <string name="register_title">Create a \nnew account</string>
 
     <string name="report_incident">Report an incident</string>
-    <string name="welcome_message">Welcome back, User!</string>
+    <string name="welcome_message">Welcome back!</string>
+    <string name="report_message">New Report</string>
+
 
     <string name="weird">Noticed anything weird?\nLet us know!</string>
     <string name="dont_worry">Don\'t worry!\nWe\'ll take on from here!</string>
@@ -26,11 +28,9 @@
     <string name="report_location">Location</string>
     <string name="accept">Accept</string>
     <string name="decline">Decline</string>
-
-
-
-
-
+    <string name="statistics">Reports History</string>
+    <string name="details">Details</string>
+    <string name="active_reports_header">Active Reports</string>
 
 
 </resources>

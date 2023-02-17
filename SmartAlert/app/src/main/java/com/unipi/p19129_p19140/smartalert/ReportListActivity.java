@@ -5,8 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +26,7 @@ import com.google.firebase.database.core.Repo;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ReportListActivity extends AppCompatActivity {
@@ -28,12 +37,19 @@ public class ReportListActivity extends AppCompatActivity {
     ArrayList<ReportModel> all_reports;
     ArrayList<ReportModel> all_reports_filtered;
     ArrayList<ReportModel> report_list;
+    TextView greek_lan_btn, english_lan_btn;
+    private ImageView menu_report,menu_logout;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_list);
+        greek_lan_btn=findViewById(R.id.greek_language);
+        english_lan_btn=findViewById(R.id.english_language);
+        menu_report=findViewById(R.id.menu_report);
+        menu_logout=findViewById(R.id.logout_btn);
 
         recyclerView = findViewById(R.id.report_list);
         db = FirebaseDatabase.getInstance().getReference("alerts");
@@ -45,6 +61,13 @@ public class ReportListActivity extends AppCompatActivity {
         report_list = new ArrayList<>();
         reportAdapter = new ReportAdapter(this, report_list);
         recyclerView.setAdapter(reportAdapter);
+
+        //Language Functions
+        Select_Greek();
+        Select_English();
+        //Menu Functions
+        to_logout();
+        to_report();
 
         db.addValueEventListener(new ValueEventListener() {
             @Override
@@ -59,7 +82,7 @@ public class ReportListActivity extends AppCompatActivity {
                 }
                 String s_type = "";
                 int count = 0;
-                for (int temp = 0; temp < all_reports.size(); temp++) {
+                for (int temp = 0; temp < 20; temp++) {
                     // && disObj.beforeNow(all_reports.get(temp).getTimestamp())
                     if (all_reports.get(temp).getStatus().equals("pending") ) {
                         all_reports_filtered.add(all_reports.get(temp));
@@ -97,6 +120,62 @@ public class ReportListActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    private void to_report() {
+        menu_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportListActivity.this,ReportActivity.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
+            }
+        });
+    }
+
+    private void to_logout() {
+        menu_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReportListActivity.this,LoginActivity.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+            }
+        });
+    }
+
+    private void Select_English() {
+        english_lan_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLanguage("en");
+                startActivity(new Intent(ReportListActivity.this,ReportListActivity.class));
+            }
+        });
+    }
+
+    private void Select_Greek() {
+        greek_lan_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setLanguage("el");
+                startActivity(new Intent(ReportListActivity.this,ReportListActivity.class));
+
+            }
+        });
+    }
+
+    private void setLanguage(String code) {
+        Resources resources = getResources();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        Configuration configuration = resources.getConfiguration();
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            configuration.setLocale(new Locale(code.toLowerCase()));
+        }
+        else {
+            configuration.locale= new Locale(code.toLowerCase());
+
+        }
+        resources.updateConfiguration(configuration,displayMetrics);
 
     }
 }

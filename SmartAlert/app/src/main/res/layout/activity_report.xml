@@ -14,6 +14,48 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/english_language"
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EN"
+                android:textColor="@color/blue"
+                android:textSize="13sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.015"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.203" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="9dp"
+                android:layout_height="15dp"
+                android:textColor="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="@+id/greek_language"
+                app:layout_constraintEnd_toStartOf="@+id/greek_language"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/english_language"
+                app:layout_constraintTop_toTopOf="@+id/english_language"
+                app:srcCompat="@drawable/divider_blue" />
+
+            <TextView
+                android:id="@+id/greek_language"
+                style="@style/viewParent.headerText.NoMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="66dp"
+                android:text="EL"
+                android:textColor="@color/blue"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.078"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -48,7 +90,7 @@
                         android:layout_marginTop="30dp"
                         android:layout_height="40dp"
 
-                        android:hint="Details" />
+                        android:hint="@string/details" />
 
                     <Button
                         android:id="@+id/upload_img"
@@ -56,7 +98,8 @@
                         android:layout_height="35dp"
                         android:layout_marginTop="30dp"
                         android:text="@string/upload_image"
-
+                        android:textAlignment="center"
+                        android:padding="2dp"
                         />
 
 
@@ -95,14 +138,14 @@
                 style="@style/viewParent.headerText.NoMode"
                 android:text="@string/weird"
                 android:textAlignment="textEnd"
-                android:textColor="#6AA9FF"
-
+                android:textColor="@color/blue"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/cardView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.859"
+                app:layout_constraintHorizontal_bias="0.834"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.964" />
+                app:layout_constraintVertical_bias="0.924" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -119,8 +162,8 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="177dp"
-                android:layout_height="155dp"
+                android:layout_width="166dp"
+                android:layout_height="144dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toTopOf="@+id/textView4"
                 app:layout_constraintEnd_toEndOf="parent"

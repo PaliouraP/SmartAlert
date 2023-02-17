@@ -10,7 +10,7 @@
     <string name="login_password_confirm_hint">Επιβεβαίωση Κωδικού Πρόσβασης</string>
     <string name="register_button">Δημιουργια Λογαριασμου</string>
     <string name="report_incident">Καταγράψτε ένα περιστατικό</string>
-    <string name="welcome_message">Καλωσήρθες και πάλι, user!</string>
+    <string name="welcome_message">Καλωσήρθες και πάλι!</string>
     <string name="weird">Παρατηρήσατε κάτι περίεργο;\nΕνημερώστε μας!</string>
     <string name="dont_worry">Μην ανησυχείτε!\nΘα το αναλάβουμε εμείς!</string>
     <string name="upload_image">Ανεβαστε Φωτογραφια</string>
@@ -20,4 +20,8 @@
     <string name="report_location">Τοποθεσία</string>
     <string name="accept">αποδοχη</string>
     <string name="decline">απορριψη</string>
+    <string name="report_message">Νέα καταγραφή</string>
+    <string name="statistics">Ιστορικό καταγραφών</string>
+    <string name="details">Λεπτομέρειες</string>
+    <string name="active_reports_header">Ενεργά Περιστατικά</string>
 </resources>
