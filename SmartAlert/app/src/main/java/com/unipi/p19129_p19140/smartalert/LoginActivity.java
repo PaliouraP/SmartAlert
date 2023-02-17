@@ -3,7 +3,9 @@ package com.unipi.p19129_p19140.smartalert;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -33,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ImageView add;
     private TextView to_register;
-    DatabaseReference ref;
+    private DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,9 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(new Intent(LoginActivity.this, ReportListActivity.class));
                                 Toast.makeText(LoginActivity.this, "Successful login!", Toast.LENGTH_SHORT).show();
                             }else{
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                Intent ii=new Intent(LoginActivity.this, HomeActivity.class);
+                                ii.putExtra("uid", firebaseUser.getUid());
+                                startActivity(ii);
                                 Toast.makeText(LoginActivity.this, "Successful login!", Toast.LENGTH_SHORT).show();
                             }
                         }catch (Throwable e){

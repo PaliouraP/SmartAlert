@@ -2,11 +2,14 @@ package com.unipi.p19129_p19140.smartalert;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
     GridView options;
     private ImageView menu_report,menu_logout;
     TextView greek_lan_btn, english_lan_btn;
+    private String uid;
 
 
     @Override
@@ -42,6 +46,14 @@ public class HomeActivity extends AppCompatActivity {
         gridview();
         Select_Greek();
         Select_English();
+
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+
+        if(b!=null)
+        {
+            uid =(String) b.get("uid");
+        }
     }
 
     private void Select_English() {
@@ -120,6 +132,7 @@ public class HomeActivity extends AppCompatActivity {
                 switch (position){
                     case 0:
                         intent = new Intent(HomeActivity.this,ReportActivity.class);
+                        intent.putExtra("uid", uid);
                         break;
                     case 1:
                         intent = new Intent(HomeActivity.this,LoginActivity.class);

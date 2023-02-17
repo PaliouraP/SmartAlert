@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -14,6 +15,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -78,6 +80,8 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
     Uri selectedImageUri;
     boolean uploaded;
 
+    private String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +99,14 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
 
         storage=FirebaseStorage.getInstance();
         storageReference=storage.getReference();
+
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+
+        if(b!=null)
+        {
+            uid =(String) b.get("uid");
+        }
 
         // Setting spinner items
         String[] items = new String[]{"Fire", "Flood", "Dangerous Weather", "Earthquake","Other"};
@@ -226,7 +238,7 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
         String user_location=latitude+","+longitude;
         uploadImage(type,user_location);
         HashMap<String, Object> map = new HashMap<>();
-        map.put("User", "user id"); //change to actual user id
+        map.put("User", uid); //change to actual user id
         map.put("Location", user_location); // change to actual location
         map.put("Timestamp", timestamp);
         map.put("Type", type);
