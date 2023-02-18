@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -27,6 +28,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -68,6 +70,7 @@ public class ReportListActivity extends AppCompatActivity {
         to_logout();
 
         db.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DistanceBetween disObj = new DistanceBetween();
@@ -92,8 +95,7 @@ public class ReportListActivity extends AppCompatActivity {
                     }
                 }
 
-                Log.d("valid reports", String.valueOf(all_reports_filtered.size()));
-
+                List<String> prevList = new ArrayList<>();
                 iterator = all_reports_filtered.entrySet().iterator();
                 while (iterator.hasNext()) {
                     Map.Entry<String, ReportModel> entry = iterator.next();
@@ -108,18 +110,18 @@ public class ReportListActivity extends AppCompatActivity {
                     ArrayList<String> report_ids = new ArrayList<>();
                     report_ids.add(report_key);
 
-
-                    Iterator<Map.Entry<String, ReportModel>> other_iterator = all_reports.entrySet().iterator();
-                    while (other_iterator.hasNext()) {
-                        Map.Entry<String, ReportModel> other_entry = other_iterator.next();
-                        String other_report_key = other_entry.getKey();
-                        ReportModel other_report_value = other_entry.getValue();
-                        boolean check_dis = disObj.checkDistance(general_report.Location, other_report_value.getLocation());
-                        boolean time_dif = disObj.checkDuration(general_report.Timestamp, other_report_value.getTimestamp());
-                        boolean dif_user = (!report_value.getUser().equals(other_report_value.getUser()));
-                        if (other_report_value.getType().equals(s_type) && check_dis && time_dif && dif_user ) {
-                            count++;
-                            report_ids.add(other_report_key);
+                    if (!prevList.contains(report_key)){
+                        for (Map.Entry<String, ReportModel> other_entry : all_reports_filtered.entrySet()) {
+                            String other_report_key = other_entry.getKey();
+                            ReportModel other_report_value = other_entry.getValue();
+                            boolean check_dis = disObj.checkDistance(general_report.Location, other_report_value.getLocation());
+                            boolean time_dif = disObj.checkDuration(general_report.Timestamp, other_report_value.getTimestamp());
+                            boolean dif_user = (!report_value.getUser().equals(other_report_value.getUser()));
+                            if (other_report_value.getType().equals(s_type) && check_dis && time_dif && dif_user) {
+                                count++;
+                                report_ids.add(other_report_key);
+                                prevList.add(other_report_key);
+                            }
                         }
                     }
                     general_report.reporter_sum = count;
@@ -127,6 +129,7 @@ public class ReportListActivity extends AppCompatActivity {
                     if (count>1) {
                         report_list.add(general_report);
                     }
+                    //all_reports_filtered.remove(report_key);
                 }
 
                 reportAdapter.notifyDataSetChanged();
@@ -177,7 +180,7 @@ public class ReportListActivity extends AppCompatActivity {
         Resources resources = getResources();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
         Configuration configuration = resources.getConfiguration();
-        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.JELLY_BEAN_MR1){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
             configuration.setLocale(new Locale(code.toLowerCase()));
         }
         else {
