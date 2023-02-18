@@ -15,27 +15,28 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Repo;
 
-import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Locale;
-import java.util.Objects;
+import java.util.Map;
 
 public class ReportListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     DatabaseReference db;
     ReportAdapter reportAdapter;
-    ArrayList<ReportModel> all_reports;
-    ArrayList<ReportModel> all_reports_filtered;
+    HashMap<String, ReportModel> all_reports;
+    HashMap<String, ReportModel> all_reports_filtered;
     ArrayList<ReportModel> report_list;
     TextView greek_lan_btn, english_lan_btn;
     private ImageView menu_logout;
@@ -54,8 +55,8 @@ public class ReportListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        all_reports = new ArrayList<>();
-        all_reports_filtered = new ArrayList<>();
+        all_reports = new HashMap<>();
+        all_reports_filtered = new HashMap<>();
         report_list = new ArrayList<>();
         reportAdapter = new ReportAdapter(this, report_list);
         recyclerView.setAdapter(reportAdapter);
@@ -74,39 +75,58 @@ public class ReportListActivity extends AppCompatActivity {
 
                     ReportModel report = dataSnapshot.getValue(ReportModel.class);
 
-                    all_reports.add(report);
+                    all_reports.put(dataSnapshot.getKey(), report);
+
 
                 }
                 String s_type = "";
                 int count = 0;
-                for (int temp = 0; temp < 20; temp++) {
-                    // && disObj.beforeNow(all_reports.get(temp).getTimestamp())
-                    if (all_reports.get(temp).getStatus().equals("pending") ) {
-                        all_reports_filtered.add(all_reports.get(temp));
+                Iterator<Map.Entry<String, ReportModel>> iterator = all_reports.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry<String, ReportModel> entry = iterator.next();
+                    String report_key = entry.getKey();
+                    ReportModel report_value = entry.getValue();
+                    if (report_value.getStatus().equals("pending") ) {
+
+                        all_reports_filtered.put(report_key, report_value);
                     }
                 }
+
                 Log.d("valid reports", String.valueOf(all_reports_filtered.size()));
-                for (int i = 0; i < all_reports_filtered.size(); i++){
-                    s_type = all_reports_filtered.get(i).getType();
+
+                iterator = all_reports_filtered.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry<String, ReportModel> entry = iterator.next();
+                    String report_key = entry.getKey();
+                    ReportModel report_value = entry.getValue();
+                    s_type = report_value.getType();
                     count = 1;
                     ReportModel general_report = new ReportModel();
                     general_report.Type = s_type;
-                    general_report.Location = all_reports_filtered.get(i).getLocation();
-                    general_report.Timestamp = all_reports_filtered.get(i).getTimestamp();
+                    general_report.Location = report_value.getLocation();
+                    general_report.Timestamp = report_value.getTimestamp();
+                    ArrayList<String> report_ids = new ArrayList<>();
+                    report_ids.add(report_key);
 
-                    for(int j = i+1; j < all_reports_filtered.size(); j++){
-                        boolean check_dis = disObj.checkDistance(all_reports_filtered.get(i).getLocation(), all_reports_filtered.get(j).getLocation());
-                        boolean time_dif = disObj.checkDuration(all_reports_filtered.get(i).getTimestamp(), all_reports_filtered.get(j).getTimestamp());
-                        boolean dif_user = (!all_reports_filtered.get(i).getUser().equals(all_reports_filtered.get(j).getUser()));
-                        if (all_reports_filtered.get(j).getType().equals(s_type) && check_dis && time_dif && dif_user ) {
+
+                    Iterator<Map.Entry<String, ReportModel>> other_iterator = all_reports.entrySet().iterator();
+                    while (other_iterator.hasNext()) {
+                        Map.Entry<String, ReportModel> other_entry = other_iterator.next();
+                        String other_report_key = other_entry.getKey();
+                        ReportModel other_report_value = other_entry.getValue();
+                        boolean check_dis = disObj.checkDistance(general_report.Location, other_report_value.getLocation());
+                        boolean time_dif = disObj.checkDuration(general_report.Timestamp, other_report_value.getTimestamp());
+                        boolean dif_user = (!report_value.getUser().equals(other_report_value.getUser()));
+                        if (other_report_value.getType().equals(s_type) && check_dis && time_dif && dif_user ) {
                             count++;
+                            report_ids.add(other_report_key);
                         }
                     }
                     general_report.reporter_sum = count;
+                    general_report.reports = report_ids;
                     if (count>1) {
                         report_list.add(general_report);
                     }
-                    Log.d("report", String.valueOf(i));
                 }
 
                 reportAdapter.notifyDataSetChanged();

@@ -1,9 +1,12 @@
 package com.unipi.p19129_p19140.smartalert;
 
+import java.util.ArrayList;
+
 public class ReportModel {
 
     String Type, Location, Timestamp, status, User;
     int reporter_sum;
+    ArrayList<String> reports;
 
     public String getType() {
         return Type;
