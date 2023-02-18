@@ -15,36 +15,31 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Repo;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Objects;
 
-public class ReportListActivity extends AppCompatActivity {
-
+public class PreviousReportsListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference db;
-    ReportAdapter reportAdapter;
+    PreviousReportAdapter previousreportAdapter;
     ArrayList<ReportModel> all_reports;
     ArrayList<ReportModel> all_reports_filtered;
     ArrayList<ReportModel> report_list;
     TextView greek_lan_btn, english_lan_btn;
-    private ImageView menu_logout;
-
+    private ImageView menu_logout,image_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report_list);
+        setContentView(R.layout.activity_previous_reports_list);
+
         greek_lan_btn=findViewById(R.id.greek_language);
         english_lan_btn=findViewById(R.id.english_language);
         menu_logout=findViewById(R.id.logout_btn);
@@ -57,15 +52,19 @@ public class ReportListActivity extends AppCompatActivity {
         all_reports = new ArrayList<>();
         all_reports_filtered = new ArrayList<>();
         report_list = new ArrayList<>();
-        reportAdapter = new ReportAdapter(this, report_list);
-        recyclerView.setAdapter(reportAdapter);
+        previousreportAdapter = new PreviousReportAdapter(this,report_list);
+        recyclerView.setAdapter(previousreportAdapter);
 
         //Language Functions
         Select_Greek();
         Select_English();
         //Menu Functions
         to_logout();
+        //Filling List
+        Filling_List();
+    }
 
+    private void Filling_List() {
         db.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -94,6 +93,8 @@ public class ReportListActivity extends AppCompatActivity {
                     general_report.Location = all_reports_filtered.get(i).getLocation();
                     general_report.Timestamp = all_reports_filtered.get(i).getTimestamp();
 
+                    ChangeImage(s_type);
+
                     for(int j = i+1; j < all_reports_filtered.size(); j++){
                         boolean check_dis = disObj.checkDistance(all_reports_filtered.get(i).getLocation(), all_reports_filtered.get(j).getLocation());
                         boolean time_dif = disObj.checkDuration(all_reports_filtered.get(i).getTimestamp(), all_reports_filtered.get(j).getTimestamp());
@@ -109,7 +110,7 @@ public class ReportListActivity extends AppCompatActivity {
                     Log.d("report", String.valueOf(i));
                 }
 
-                reportAdapter.notifyDataSetChanged();
+                previousreportAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -117,16 +118,24 @@ public class ReportListActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
+    private void ChangeImage(String type) {
+        switch (type){
+            case "Fire":
 
+
+        }
+        if (type=="Fire"){
+
+        }
+    }
 
     private void to_logout() {
         menu_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ReportListActivity.this,LoginActivity.class));
+                startActivity(new Intent(PreviousReportsListActivity.this,LoginActivity.class));
                 overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
             }
         });
@@ -137,7 +146,7 @@ public class ReportListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setLanguage("en");
-                startActivity(new Intent(ReportListActivity.this,ReportListActivity.class));
+                startActivity(new Intent(PreviousReportsListActivity.this,PreviousReportsListActivity.class));
             }
         });
     }
@@ -147,7 +156,7 @@ public class ReportListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setLanguage("el");
-                startActivity(new Intent(ReportListActivity.this,ReportListActivity.class));
+                startActivity(new Intent(PreviousReportsListActivity.this,PreviousReportsListActivity.class));
 
             }
         });
@@ -165,6 +174,5 @@ public class ReportListActivity extends AppCompatActivity {
 
         }
         resources.updateConfiguration(configuration,displayMetrics);
-
     }
 }

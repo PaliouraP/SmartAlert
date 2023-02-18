@@ -1,5 +1,7 @@
 package com.unipi.p19129_p19140.smartalert;
 
+import android.widget.ImageView;
+
 public class ReportModel {
 
     String Type, Location, Timestamp, status, User;
@@ -28,4 +30,5 @@ public class ReportModel {
     public int getReporter_sum() {
         return reporter_sum;
     }
+
 }
