@@ -134,7 +134,6 @@
                     android:textSize="15sp"
                     android:backgroundTint="@color/decline"
                     android:text="@string/decline"
-
                     android:textColor="@color/whiteTextColor"
                     />
 

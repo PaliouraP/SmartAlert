@@ -4,6 +4,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
@@ -100,6 +103,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         }
         
         private void notification(){
+            /*
             String messageId = UUID.randomUUID().toString(); // generating random id
             FirebaseMessaging messaging = FirebaseMessaging.getInstance();
 
@@ -110,7 +114,21 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                         put("body", "There is an emergency of type '" + type_name + "' near you.");
                     }})
                     .build();
-            messaging.send(message);
+            messaging.send(message);*/
+
+            // Construct the message payload as a Bundle
+            Bundle messagePayload = new Bundle();
+            messagePayload.putString("title", "Emergency Alert");
+            messagePayload.putString("body", "There is an emergency of type '" + type_name + "' near you.");
+
+            // Create a new RemoteMessage object with the message payload
+            RemoteMessage message = new RemoteMessage(messagePayload);
+
+            // Create a new FirebaseMessagingService object
+            PushNotificationService messagingService = new PushNotificationService();
+            Log.d("FCM", message.toString());
+            // Call the onMessageReceived method with the RemoteMessage object
+            messagingService.onMessageReceived(message);
 
         }
     }

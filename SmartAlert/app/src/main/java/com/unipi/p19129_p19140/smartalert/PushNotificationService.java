@@ -23,6 +23,7 @@ public class PushNotificationService extends FirebaseMessagingService {
                 "Heads Up Notification",
                 NotificationManager.IMPORTANCE_HIGH
         );
+        Log.d("FCM", NotificationManager.class.toString());
         getSystemService(NotificationManager.class).createNotificationChannel(channel);
         Notification.Builder notification = new Notification.Builder(this, CHANNEL_ID)
                 .setContentTitle(title)

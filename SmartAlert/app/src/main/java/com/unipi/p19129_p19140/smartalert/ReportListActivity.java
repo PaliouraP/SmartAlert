@@ -82,7 +82,6 @@ public class ReportListActivity extends AppCompatActivity {
 
                     all_reports.put(dataSnapshot.getKey(), report);
 
-
                 }
                 String s_type = "";
                 int count = 0;
