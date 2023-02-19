@@ -18,7 +18,8 @@
         <activity
             android:name=".PreviousReportsListActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_white">
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -27,7 +28,7 @@
         <activity
             android:name=".ReportListActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_white">
             >
             <meta-data
                 android:name="android.app.lib_name"
@@ -36,7 +37,7 @@
         <activity
             android:name=".ReportActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_white">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -52,7 +53,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme_white2">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
