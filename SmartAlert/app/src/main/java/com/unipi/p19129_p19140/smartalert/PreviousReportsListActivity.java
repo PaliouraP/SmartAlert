@@ -49,7 +49,7 @@ public class PreviousReportsListActivity extends AppCompatActivity {
         english_lan_btn=findViewById(R.id.english_language);
         menu_logout=findViewById(R.id.logout_btn);
 
-        recyclerView = findViewById(R.id.report_list);
+        recyclerView = findViewById(R.id.previous_report_list);
         db = FirebaseDatabase.getInstance().getReference("alerts");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -57,7 +57,7 @@ public class PreviousReportsListActivity extends AppCompatActivity {
         all_reports = new HashMap<>();
         all_reports_filtered = new HashMap<>();
         report_list = new ArrayList<>();
-        previousreportAdapter = new PreviousReportAdapter(this,report_list);
+        previousreportAdapter = new PreviousReportAdapter(this, report_list);
         recyclerView.setAdapter(previousreportAdapter);
 
         //Language Functions
@@ -80,8 +80,6 @@ public class PreviousReportsListActivity extends AppCompatActivity {
                     ReportModel report = dataSnapshot.getValue(ReportModel.class);
 
                     all_reports.put(dataSnapshot.getKey(), report);
-
-
                 }
                 String s_type = "";
                 int count = 0;
@@ -125,12 +123,11 @@ public class PreviousReportsListActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    general_report.reporter_sum = count;
-                    general_report.reports = report_ids;
+                    //general_report.reporter_sum = count;
+                    //general_report.reports = report_ids;
                     if (count>1) {
                         report_list.add(general_report);
                     }
-                    //all_reports_filtered.remove(report_key);
                 }
 
                 previousreportAdapter.notifyDataSetChanged();

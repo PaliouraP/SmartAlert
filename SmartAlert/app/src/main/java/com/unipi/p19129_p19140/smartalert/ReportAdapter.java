@@ -58,7 +58,6 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
     public static class ReportViewHolder extends RecyclerView.ViewHolder {
         TextView type, location, time, reporter_sum;
         Button accept_btn, decline_btn;
-        //ReportModel report;
         ArrayList<String> report_ids;
 
         public ReportViewHolder(@NonNull View itemView) {

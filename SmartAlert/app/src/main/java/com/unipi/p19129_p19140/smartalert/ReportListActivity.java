@@ -129,7 +129,6 @@ public class ReportListActivity extends AppCompatActivity {
                     if (count>1) {
                         report_list.add(general_report);
                     }
-                    //all_reports_filtered.remove(report_key);
                 }
 
                 reportAdapter.notifyDataSetChanged();

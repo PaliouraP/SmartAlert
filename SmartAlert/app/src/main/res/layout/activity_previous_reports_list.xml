@@ -64,7 +64,7 @@
                 android:textColor="@color/blue"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/report_list"
+                app:layout_constraintBottom_toTopOf="@+id/previous_report_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
             </TextView>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/report_list"
+                android:id="@+id/previous_report_list"
                 android:layout_width="409dp"
                 android:layout_height="729dp"
                 android:padding="10dp"
