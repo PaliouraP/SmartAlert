@@ -70,6 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 }
                 else {
+                    Toast.makeText(RegisterActivity.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
                     registerUser(txt_email.trim(), txt_password.trim());
                 }
             }
