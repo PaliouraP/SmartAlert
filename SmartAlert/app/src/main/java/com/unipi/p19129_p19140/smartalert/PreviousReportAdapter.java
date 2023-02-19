@@ -31,20 +31,17 @@ public class PreviousReportAdapter extends RecyclerView.Adapter<PreviousReportAd
     @NonNull
     @Override
     public PreviousReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.single_report, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.single_previous_report, parent, false);
         return new PreviousReportViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull PreviousReportViewHolder holder, int position) {
         ReportModel report = report_list.get(position);
-        //Log.d("type", report.getType());
-        Log.d("time", report.getTimestamp());
-        Log.d("location", report.getLocation());
         holder.type.setText(report.getType());
 
-        //holder.location.setText(report.getLocation());
-        //holder.time.setText(report.getTimestamp());
+        holder.location.setText(report.getLocation());
+        holder.time.setText(report.getTimestamp());
     }
 
     @Override
@@ -56,7 +53,7 @@ public class PreviousReportAdapter extends RecyclerView.Adapter<PreviousReportAd
         TextView type, location, time;
         public PreviousReportViewHolder(@NonNull View itemView) {
             super(itemView);
-            type = itemView.findViewById(R.id.single_report_type);
+            type = itemView.findViewById(R.id.single_previous_report_type);
             location = itemView.findViewById(R.id.single_previous_report_location);
             time = itemView.findViewById(R.id.single_previous_report_time);
         }
