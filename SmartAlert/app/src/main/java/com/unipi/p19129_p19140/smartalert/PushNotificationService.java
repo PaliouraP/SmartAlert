@@ -3,6 +3,7 @@ package com.unipi.p19129_p19140.smartalert;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationManagerCompat;
@@ -13,8 +14,9 @@ import com.google.firebase.messaging.RemoteMessage;
 public class PushNotificationService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
-        String title = message.getNotification().getTitle();
-        String body = message.getNotification().getBody();
+        Log.d("FCM", "Message data payload: " + message.getData());
+        String title = message.getData().get("title");
+        String body = message.getData().get("body");
         final String CHANNEL_ID = "HEADS_UP_NOTIFICATION";
         NotificationChannel channel = new NotificationChannel(
                 CHANNEL_ID,

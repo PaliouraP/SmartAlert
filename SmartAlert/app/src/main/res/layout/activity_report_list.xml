@@ -86,6 +86,49 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/whiteTextColor"
+        android:elevation="7dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:padding="7dp"
+        >
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/loginViewsMargin"
+            android:src="@drawable/house">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/reports"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/loginViewsMargin"
+            android:src="@drawable/siren">
+            >
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/logout_btn"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/loginViewsMargin"
+            android:src="@drawable/logout"
+            >
+
+
+        </ImageView>
+
+    </LinearLayout>
 
 
 </RelativeLayout>

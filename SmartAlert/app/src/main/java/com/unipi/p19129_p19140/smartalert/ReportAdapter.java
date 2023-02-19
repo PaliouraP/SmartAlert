@@ -1,6 +1,9 @@
 package com.unipi.p19129_p19140.smartalert;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.UUID;
 
-public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportViewHolder>{
+public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportViewHolder> {
 
     Context context;
 
@@ -48,6 +54,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         holder.reporter_sum.setText(String.valueOf(report.reporter_sum));
 
         holder.report_ids = report.reports;
+        holder.type_name = report.getType();
     }
 
     @Override
@@ -59,6 +66,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         TextView type, location, time, reporter_sum;
         Button accept_btn, decline_btn;
         ArrayList<String> report_ids;
+        String type_name;
 
         public ReportViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +85,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                         FirebaseDatabase.getInstance().getReference().child("alerts").child(report_ids.get(i)).child("status").setValue("accepted");
                     }
                     //message and refresh
+                    notification();
                 }
             });
             decline_btn.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +97,21 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                     //message and refresh
                 }
             });
+        }
+        
+        private void notification(){
+            String messageId = UUID.randomUUID().toString(); // generating random id
+            FirebaseMessaging messaging = FirebaseMessaging.getInstance();
+
+            RemoteMessage message = new RemoteMessage.Builder("658008603000@fcm.googleapis.com")
+                    .setMessageId(messageId)
+                    .setData(new HashMap<String, String>() {{
+                        put("title", "Emergency Alert");
+                        put("body", "There is an emergency of type '" + type_name + "' near you.");
+                    }})
+                    .build();
+            messaging.send(message);
+
         }
     }
 }
