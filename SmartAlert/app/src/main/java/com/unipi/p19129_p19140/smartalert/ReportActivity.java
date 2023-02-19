@@ -56,8 +56,7 @@ public class ReportActivity extends AppCompatActivity implements LocationListene
 
     private Spinner type;
     private EditText details;
-    private ImageView report;
-    private Button upload;
+    private Button upload,report;
     private ImageView menu_report,menu_logout,menu_home;
     TextView greek_lan_btn, english_lan_btn;
 

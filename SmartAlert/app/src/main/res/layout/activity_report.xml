@@ -15,20 +15,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="40dp">
+
             <TextView
                 android:id="@+id/english_language"
                 style="@style/viewParent.headerText.NoMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="EN"
                 android:textColor="@color/blue"
-                android:textSize="13sp"
 
+                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.015"
+                app:layout_constraintHorizontal_bias="0.027"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.203" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -39,7 +40,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/greek_language"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/english_language"
-                app:layout_constraintTop_toTopOf="@+id/english_language"
+                app:layout_constraintTop_toTopOf="@+id/greek_language"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/divider_blue" />
 
             <TextView
@@ -53,10 +55,10 @@
                 android:textSize="13sp"
                 app:layout_constraintBottom_toTopOf="@+id/imageView3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.078"
+                app:layout_constraintHorizontal_bias="0.09"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.21" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -92,13 +94,33 @@
                         android:layout_height="40dp"
 
                         android:hint="@string/details" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/modifiedEditText"
+                            android:text="Upload Image (Optional)"
+                            android:layout_marginEnd="10dp">
+
+                        </TextView>
+
+                        <Button
+                            android:id="@+id/upload_img"
+                            android:layout_width="51dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/circle"
+                            android:elevation="0dp"/>
+                    </LinearLayout>
 
                     <Button
-                        android:id="@+id/upload_img"
+                        android:id="@+id/report_btn"
                         style="@style/loginButton"
                         android:layout_height="35dp"
-                        android:layout_marginTop="30dp"
-                        android:text="@string/upload_image"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/report_btn"
                         android:textAlignment="center"
                         android:padding="2dp"
                         />
@@ -118,21 +140,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <ImageView
-                android:id="@+id/report_btn"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_add_img"
-                android:layout_marginBottom="40dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.974"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.975" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -154,11 +161,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="28dp"
-                android:layout_marginBottom="4dp"
                 android:text="@string/dont_worry"
                 android:textAlignment="textEnd"
                 android:textColor="#6AA9FF"
-                app:layout_constraintBottom_toTopOf="@+id/report_btn"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView

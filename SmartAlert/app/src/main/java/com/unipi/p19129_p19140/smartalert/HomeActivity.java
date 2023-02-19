@@ -144,7 +144,7 @@ public class HomeActivity extends AppCompatActivity {
                         intent.putExtra("uid", uid);
                         break;
                     case 1:
-                        intent = new Intent(HomeActivity.this,LoginActivity.class);
+                        intent = new Intent(HomeActivity.this,PreviousReportsListActivity.class);
 
                 }
                 startActivity(intent);

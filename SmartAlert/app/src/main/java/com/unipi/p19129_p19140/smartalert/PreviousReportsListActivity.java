@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -23,17 +24,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class PreviousReportsListActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     DatabaseReference db;
     PreviousReportAdapter previousreportAdapter;
-    ArrayList<ReportModel> all_reports;
-    ArrayList<ReportModel> all_reports_filtered;
+    HashMap<String, ReportModel> all_reports;
+    HashMap<String, ReportModel> all_reports_filtered;
     ArrayList<ReportModel> report_list;
     TextView greek_lan_btn, english_lan_btn;
-    private ImageView menu_logout,image_type;
+    private ImageView menu_logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +54,8 @@ public class PreviousReportsListActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        all_reports = new ArrayList<>();
-        all_reports_filtered = new ArrayList<>();
+        all_reports = new HashMap<>();
+        all_reports_filtered = new HashMap<>();
         report_list = new ArrayList<>();
         previousreportAdapter = new PreviousReportAdapter(this,report_list);
         recyclerView.setAdapter(previousreportAdapter);
@@ -64,8 +69,9 @@ public class PreviousReportsListActivity extends AppCompatActivity {
         Filling_List();
     }
 
-    private void Filling_List() {
+    public void Filling_List() {
         db.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 DistanceBetween disObj = new DistanceBetween();
@@ -73,41 +79,58 @@ public class PreviousReportsListActivity extends AppCompatActivity {
 
                     ReportModel report = dataSnapshot.getValue(ReportModel.class);
 
-                    all_reports.add(report);
+                    all_reports.put(dataSnapshot.getKey(), report);
+
 
                 }
                 String s_type = "";
                 int count = 0;
-                for (int temp = 0; temp < all_reports.size(); temp++) {
-                    // && disObj.beforeNow(all_reports.get(temp).getTimestamp())
-                    if (all_reports.get(temp).getStatus().equals("pending") ) {
-                        all_reports_filtered.add(all_reports.get(temp));
+                Iterator<Map.Entry<String, ReportModel>> iterator = all_reports.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry<String, ReportModel> entry = iterator.next();
+                    String report_key = entry.getKey();
+                    ReportModel report_value = entry.getValue();
+                    if (report_value.getStatus().equals("accepted") ) {
+
+                        all_reports_filtered.put(report_key, report_value);
                     }
                 }
-                Log.d("valid reports", String.valueOf(all_reports_filtered.size()));
-                for (int i = 0; i < all_reports_filtered.size(); i++){
-                    s_type = all_reports_filtered.get(i).getType();
+
+                List<String> prevList = new ArrayList<>();
+                iterator = all_reports_filtered.entrySet().iterator();
+                while (iterator.hasNext()) {
+                    Map.Entry<String, ReportModel> entry = iterator.next();
+                    String report_key = entry.getKey();
+                    ReportModel report_value = entry.getValue();
+                    s_type = report_value.getType();
                     count = 1;
                     ReportModel general_report = new ReportModel();
                     general_report.Type = s_type;
-                    general_report.Location = all_reports_filtered.get(i).getLocation();
-                    general_report.Timestamp = all_reports_filtered.get(i).getTimestamp();
+                    general_report.Location = report_value.getLocation();
+                    general_report.Timestamp = report_value.getTimestamp();
+                    ArrayList<String> report_ids = new ArrayList<>();
+                    report_ids.add(report_key);
 
-                    ChangeImage(s_type);
-
-                    for(int j = i+1; j < all_reports_filtered.size(); j++){
-                        boolean check_dis = disObj.checkDistance(all_reports_filtered.get(i).getLocation(), all_reports_filtered.get(j).getLocation());
-                        boolean time_dif = disObj.checkDuration(all_reports_filtered.get(i).getTimestamp(), all_reports_filtered.get(j).getTimestamp());
-                        boolean dif_user = (!all_reports_filtered.get(i).getUser().equals(all_reports_filtered.get(j).getUser()));
-                        if (all_reports_filtered.get(j).getType().equals(s_type) && check_dis && time_dif && dif_user ) {
-                            count++;
+                    if (!prevList.contains(report_key)){
+                        for (Map.Entry<String, ReportModel> other_entry : all_reports_filtered.entrySet()) {
+                            String other_report_key = other_entry.getKey();
+                            ReportModel other_report_value = other_entry.getValue();
+                            boolean check_dis = disObj.checkDistance(general_report.Location, other_report_value.getLocation());
+                            boolean time_dif = disObj.checkDuration(general_report.Timestamp, other_report_value.getTimestamp());
+                            boolean dif_user = (!report_value.getUser().equals(other_report_value.getUser()));
+                            if (other_report_value.getType().equals(s_type) && check_dis && time_dif && dif_user) {
+                                count++;
+                                report_ids.add(other_report_key);
+                                prevList.add(other_report_key);
+                            }
                         }
                     }
                     general_report.reporter_sum = count;
+                    general_report.reports = report_ids;
                     if (count>1) {
                         report_list.add(general_report);
                     }
-                    Log.d("report", String.valueOf(i));
+                    //all_reports_filtered.remove(report_key);
                 }
 
                 previousreportAdapter.notifyDataSetChanged();
@@ -118,18 +141,9 @@ public class PreviousReportsListActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
-    private void ChangeImage(String type) {
-        switch (type){
-            case "Fire":
-
-
-        }
-        if (type=="Fire"){
-
-        }
-    }
 
     private void to_logout() {
         menu_logout.setOnClickListener(new View.OnClickListener() {

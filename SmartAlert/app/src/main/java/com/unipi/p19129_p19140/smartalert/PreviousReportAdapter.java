@@ -4,14 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
-public class PreviousReportAdapter  extends RecyclerView.Adapter<ReportAdapter.ReportViewHolder>{
+public class PreviousReportAdapter  extends RecyclerView.Adapter<ReportAdapter.ReportViewHolder> {
 
     Context context;
 
@@ -25,7 +28,7 @@ public class PreviousReportAdapter  extends RecyclerView.Adapter<ReportAdapter.R
     @NonNull
     @Override
     public ReportAdapter.ReportViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.single_previous_report, parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.single_report, parent, false);
         return new ReportAdapter.ReportViewHolder(v);
     }
 
@@ -37,22 +40,14 @@ public class PreviousReportAdapter  extends RecyclerView.Adapter<ReportAdapter.R
         holder.time.setText(report.getTimestamp());
 
         holder.reporter_sum.setText(String.valueOf(report.reporter_sum));
+
+        holder.report_ids = report.reports;
     }
 
     @Override
     public int getItemCount() {
         return report_list.size();
     }
-
-    public static class ReportViewHolder extends RecyclerView.ViewHolder {
-        TextView type, location, time, reporter_sum;
-
-        public ReportViewHolder(@NonNull View itemView) {
-            super(itemView);
-            type = itemView.findViewById(R.id.single_report_type);
-            location = itemView.findViewById(R.id.single_report_location);
-            time = itemView.findViewById(R.id.single_report_time);
-            reporter_sum = itemView.findViewById(R.id.single_report_reporters_sum);
-        }
-    }
 }
+
+

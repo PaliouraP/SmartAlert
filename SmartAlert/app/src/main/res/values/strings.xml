@@ -20,7 +20,8 @@
 
     <string name="weird">Noticed anything weird?\nLet us know!</string>
     <string name="dont_worry">Don\'t worry!\nWe\'ll take on from here!</string>
-    <string name="upload_image">Upload Image</string>
+    <string name="upload_image">Upload Image (Optional)</string>
+    <string name="report_btn">Report Incident</string>
 
     <string name="title_reports">Current Reports</string>
     <string name="no_reports">No. of reports</string>
