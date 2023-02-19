@@ -24,4 +24,5 @@
     <string name="statistics">Ιστορικό καταγραφών</string>
     <string name="details">Λεπτομέρειες</string>
     <string name="active_reports_header">Ενεργά Περιστατικά</string>
+    <string name="previous_reports_header">Ιστορικό Περιστατικών</string>
 </resources>

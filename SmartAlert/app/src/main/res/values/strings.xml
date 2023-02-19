@@ -31,6 +31,8 @@
     <string name="statistics">Reports History</string>
     <string name="details">Details</string>
     <string name="active_reports_header">Active Reports</string>
+    <string name="previous_reports_header">Reports History</string>
+
 
 
 </resources>
