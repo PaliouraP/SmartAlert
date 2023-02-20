@@ -60,6 +60,9 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
 
         holder.report_ids = report.reports;
         holder.type_name = report.getType();
+        holder.location_name = report.getLocation();
+        holder.time_stamp = report.getTimestamp();
+        holder.reporters = String.valueOf(report.reporter_sum);
 
 
     }
@@ -73,7 +76,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         TextView type, location, time, reporter_sum;
         Button accept_btn, decline_btn;
         ArrayList<String> report_ids;
-        String type_name;
+        String type_name, location_name, reporters, time_stamp;
 
         public ReportViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,14 +91,14 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             accept_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    for (int i=0; i<=report_ids.size()-1; i++){
-                        FirebaseDatabase.getInstance().getReference().child("alerts").child(report_ids.get(i)).child("status").setValue("accepted");
-                    }
-
-                    Toast.makeText(view.getContext(),"Report Accepted",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(view.getContext(),ReportActivity.class);
+                    Intent intent = new Intent(view.getContext(),ConfirmAcceptActivity.class);
+                    intent.putExtra("type", type_name);
+                    intent.putExtra("time", time_stamp);
+                    intent.putExtra("location", location_name);
+                    intent.putExtra("report_num", reporters);
+                    intent.putExtra("reporter_ids", report_ids);
                     view.getContext().startActivity(intent);
-                    notification();
+
                 }
             });
             decline_btn.setOnClickListener(new View.OnClickListener() {
@@ -107,38 +110,10 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
                     }
                     Toast.makeText(view.getContext(),"Report Declined",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(view.getContext(),ReportActivity.class);
-                    view.getContext().startActivity(intent);                }
+                    view.getContext().startActivity(intent);
+                }
             });
         }
 
-        private void notification(){
-            /*
-            String messageId = UUID.randomUUID().toString(); // generating random id
-            FirebaseMessaging messaging = FirebaseMessaging.getInstance();
-
-            RemoteMessage message = new RemoteMessage.Builder("658008603000@fcm.googleapis.com")
-                    .setMessageId(messageId)
-                    .setData(new HashMap<String, String>() {{
-                        put("title", "Emergency Alert");
-                        put("body", "There is an emergency of type '" + type_name + "' near you.");
-                    }})
-                    .build();
-            messaging.send(message);*/
-
-            // Construct the message payload as a Bundle
-            Bundle messagePayload = new Bundle();
-            messagePayload.putString("title", "Emergency Alert");
-            messagePayload.putString("body", "There is an emergency of type '" + type_name + "' near you.");
-
-            // Create a new RemoteMessage object with the message payload
-            //RemoteMessage message = new RemoteMessage(messagePayload);
-
-            // Create a new FirebaseMessagingService object
-            PushNotificationService messagingService = new PushNotificationService();
-            //Log.d("FCM", message.toString());
-            // Call the onMessageReceived method with the RemoteMessage object
-            //messagingService.onMessageReceived(message);
-
-        }
     }
 }

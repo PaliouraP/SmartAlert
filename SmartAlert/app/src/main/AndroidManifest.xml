@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
     <!-- permissions for location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -14,21 +14,27 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAlert"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".ConfirmAcceptActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".PreviousReportsListActivity"
             android:exported="true"
-            android:theme="@style/AppTheme_white">
+            android:theme="@style/AppTheme_white" >
             >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity
             android:name=".ReportListActivity"
             android:exported="true"
-            android:theme="@style/AppTheme_white">
+            android:theme="@style/AppTheme_white" >
             >
             <meta-data
                 android:name="android.app.lib_name"
@@ -37,7 +43,7 @@
         <activity
             android:name=".ReportActivity"
             android:exported="true"
-            android:theme="@style/AppTheme_white">
+            android:theme="@style/AppTheme_white" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -45,7 +51,7 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -53,7 +59,7 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true"
-            android:theme="@style/AppTheme_white2">
+            android:theme="@style/AppTheme_white2" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -62,31 +68,22 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:windowSoftInputMode="adjustPan" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
 
-        <service android:name=".PushNotificationService" android:exported="false">
+        <service
+            android:name=".PushNotificationService"
+            android:exported="false" >
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT">
-                </action>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

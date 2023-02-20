@@ -24,7 +24,8 @@ public class PushNotificationService extends FirebaseMessagingService {
                 NotificationManager.IMPORTANCE_HIGH
         );
         Log.d("FCM", NotificationManager.class.toString());
-        getSystemService(NotificationManager.class).createNotificationChannel(channel);
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        manager.createNotificationChannel(channel);
         Notification.Builder notification = new Notification.Builder(this, CHANNEL_ID)
                 .setContentTitle(title)
                 .setContentText(body)
@@ -32,4 +33,5 @@ public class PushNotificationService extends FirebaseMessagingService {
         NotificationManagerCompat.from(this).notify(1, notification.build());
         super.onMessageReceived(message);
     }
+
 }
