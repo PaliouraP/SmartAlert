@@ -3,6 +3,7 @@ package com.unipi.p19129_p19140.smartalert;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -23,8 +24,8 @@ public class PushNotificationService extends FirebaseMessagingService {
                 "Heads Up Notification",
                 NotificationManager.IMPORTANCE_HIGH
         );
-        Log.d("FCM", NotificationManager.class.toString());
-        NotificationManager manager = getSystemService(NotificationManager.class);
+
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.createNotificationChannel(channel);
         Notification.Builder notification = new Notification.Builder(this, CHANNEL_ID)
                 .setContentTitle(title)

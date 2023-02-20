@@ -8,12 +8,14 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -81,6 +83,22 @@ public class ConfirmAcceptActivity extends AppCompatActivity {
 
                 NotificationManagerCompat managerCompat = NotificationManagerCompat.from(ConfirmAcceptActivity.this);
                 managerCompat.notify(1, builder.build());
+                /*
+
+                // Construct the message payload as a Bundle
+                Bundle messagePayload = new Bundle();
+                messagePayload.putString("title", "Emergency Alert");
+                messagePayload.putString("body", "There is an emergency of type '" + type + "' near you.");
+
+                // Create a new RemoteMessage object with the message payload
+                RemoteMessage message = new RemoteMessage(messagePayload);
+
+                // Create a new FirebaseMessagingService object
+                PushNotificationService messagingService = new PushNotificationService();
+                Log.d("FCM", message.toString());
+                // Call the onMessageReceived method with the RemoteMessage object
+                messagingService.onMessageReceived(message);*/
+
                 Toast.makeText(view.getContext(),"Report Accepted",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(view.getContext(),ReportListActivity.class);
                 view.getContext().startActivity(intent);
