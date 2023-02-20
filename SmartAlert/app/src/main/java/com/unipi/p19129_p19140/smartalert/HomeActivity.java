@@ -28,7 +28,7 @@ import java.util.Locale;
 public class HomeActivity extends AppCompatActivity {
 
     GridView options;
-    private ImageView menu_report,menu_logout,menu_home;
+    private ImageView menu_report,menu_logout,menu_home,menu_statistics;
     TextView greek_lan_btn, english_lan_btn;
     private String uid;
 
@@ -40,11 +40,11 @@ public class HomeActivity extends AppCompatActivity {
         menu_report=findViewById(R.id.menu_report);
         menu_logout=findViewById(R.id.logout_btn);
         menu_home=findViewById(R.id.home);
+        menu_statistics=findViewById(R.id.menu_statistics);
+
         greek_lan_btn=findViewById(R.id.greek_language);
         english_lan_btn=findViewById(R.id.english_language);
-        to_logout();
-        to_report();
-        to_home();
+        Menu_Buttons();
         gridview();
         Select_Greek();
         Select_English();
@@ -58,13 +58,36 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private void to_home() {
+    private void Menu_Buttons() {
+        menu_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,LoginActivity.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+            }
+        });
+        menu_statistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,PreviousReportsListActivity.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+            }
+        });
+        menu_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,ReportActivity.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
+            }
+        });
         menu_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this,HomeActivity.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
             }
         });
+
     }
 
     private void Select_English() {
@@ -105,24 +128,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    private void to_logout(){
-        menu_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,LoginActivity.class));
-                overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
-            }
-        });
-    }
-    private void to_report(){
-        menu_report.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,ReportActivity.class));
-                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
-            }
-        });
-    }
+
+
 
     private void gridview(){
         options=findViewById(R.id.gridview);

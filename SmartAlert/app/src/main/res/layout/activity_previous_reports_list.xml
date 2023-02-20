@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -47,10 +48,11 @@
                 android:text="EL"
                 android:textColor="@color/blue"
                 android:textSize="13sp"
+                android:layout_marginLeft="2dp"
                 app:layout_constraintBottom_toTopOf="@+id/header"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.078"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.024"
+                app:layout_constraintStart_toEndOf="@+id/english_language"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
@@ -74,8 +76,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/previous_report_list"
-                android:layout_width="409dp"
-                android:layout_height="729dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:layout_marginBottom="40dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -108,7 +110,7 @@
         </ImageView>
 
         <ImageView
-            android:id="@+id/reports"
+            android:id="@+id/menu_report"
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_margin="@dimen/loginViewsMargin"
@@ -116,7 +118,15 @@
             >
 
         </ImageView>
+        <ImageView
+            android:id="@+id/menu_statistics"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/loginViewsMargin"
+            android:src="@drawable/increase">
+            >
 
+        </ImageView>
         <ImageView
             android:id="@+id/logout_btn"
             android:layout_width="50dp"

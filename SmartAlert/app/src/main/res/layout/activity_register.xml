@@ -77,13 +77,13 @@
                 android:layout_centerVertical="true"
                 android:text="@string/register_title"
                 android:textColor="@color/whiteTextColor"/>
+
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="134dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:src="@drawable/ic_register_hero"
-                />
+                android:src="@drawable/ic_register_hero" />
 
         </RelativeLayout>
         
@@ -95,6 +95,9 @@
             app:cardBackgroundColor="@color/whiteTextColor"
             app:cardCornerRadius="10dp">
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -164,6 +167,8 @@
 
 
             </LinearLayout>
+            </ScrollView>
+
 
 
         </androidx.cardview.widget.CardView>

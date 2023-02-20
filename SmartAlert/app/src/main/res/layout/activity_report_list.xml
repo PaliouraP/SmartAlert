@@ -74,8 +74,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/report_list"
-                android:layout_width="409dp"
-                android:layout_height="729dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="40dp"
@@ -97,25 +97,6 @@
         android:layout_alignParentBottom="true"
         android:padding="7dp"
         >
-
-        <ImageView
-            android:id="@+id/home"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_margin="@dimen/loginViewsMargin"
-            android:src="@drawable/house">
-
-        </ImageView>
-
-        <ImageView
-            android:id="@+id/reports"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:layout_margin="@dimen/loginViewsMargin"
-            android:src="@drawable/siren">
-            >
-
-        </ImageView>
 
         <ImageView
             android:id="@+id/logout_btn"

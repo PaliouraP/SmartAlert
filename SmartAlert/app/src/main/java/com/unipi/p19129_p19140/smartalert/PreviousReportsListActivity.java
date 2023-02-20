@@ -38,7 +38,7 @@ public class PreviousReportsListActivity extends AppCompatActivity {
     HashMap<String, ReportModel> all_reports_filtered;
     ArrayList<ReportModel> report_list;
     TextView greek_lan_btn, english_lan_btn;
-    private ImageView menu_logout;
+    private ImageView menu_report,menu_logout,menu_home,menu_statistics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,10 @@ public class PreviousReportsListActivity extends AppCompatActivity {
 
         greek_lan_btn=findViewById(R.id.greek_language);
         english_lan_btn=findViewById(R.id.english_language);
+        menu_report=findViewById(R.id.menu_report);
         menu_logout=findViewById(R.id.logout_btn);
+        menu_home=findViewById(R.id.home);
+        menu_statistics=findViewById(R.id.menu_statistics);
 
         recyclerView = findViewById(R.id.previous_report_list);
         db = FirebaseDatabase.getInstance().getReference("alerts");
@@ -64,7 +67,7 @@ public class PreviousReportsListActivity extends AppCompatActivity {
         Select_Greek();
         Select_English();
         //Menu Functions
-        to_logout();
+        Menu_Buttons();
         //Filling List
         Filling_List();
     }
@@ -142,7 +145,7 @@ public class PreviousReportsListActivity extends AppCompatActivity {
     }
 
 
-    private void to_logout() {
+    private void Menu_Buttons() {
         menu_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +153,27 @@ public class PreviousReportsListActivity extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
             }
         });
+        menu_statistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        menu_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PreviousReportsListActivity.this,ReportActivity.class));
+                overridePendingTransition(R.anim.slide_in_left,R.anim.stay);
+            }
+        });
+        menu_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PreviousReportsListActivity.this,HomeActivity.class));
+                overridePendingTransition(R.anim.slide_in_right,R.anim.stay);
+            }
+        });
+
     }
 
     private void Select_English() {
