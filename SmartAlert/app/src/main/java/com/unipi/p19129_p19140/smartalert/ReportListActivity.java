@@ -65,11 +65,14 @@ public class ReportListActivity extends AppCompatActivity {
         reportAdapter = new ReportAdapter(this, report_list);
         recyclerView.setAdapter(reportAdapter);
 
+
         //Language Functions
         Select_Greek();
         Select_English();
         //Menu Functions
         to_logout();
+
+
 
         db.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
@@ -140,6 +143,7 @@ public class ReportListActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 
